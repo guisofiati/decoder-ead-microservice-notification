@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+
+  postgres:
+    container_name: notification_postgres_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: ead-notification
+    ports:
+      - "5435:5432"
+    volumes:
+      - notification-data:/var/lib/postgresql/data
+    networks:
+      - notification-network
+
+  pgadmin:
+    container_name: notification_pgadmin_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5052:80"
+    depends_on:
+      - postgres
+    networks:
+      - notification-network
+
+volumes:
+  notification-data:
+
+networks:
+  notification-network:
+    driver: bridge
