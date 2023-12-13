@@ -1,4 +1,4 @@
-package com.ead.notification.configs.security;
+package com.ead.notification.adapters.configs.security;
 
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;

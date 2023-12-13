@@ -1,6 +1,6 @@
-package com.ead.notification.dtos;
+package com.ead.notification.adapters.dtos;
 
-import com.ead.notification.enums.NotificationStatus;
+import com.ead.notification.core.domains.enums.NotificationStatus;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;

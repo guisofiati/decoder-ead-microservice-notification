@@ -1,4 +1,4 @@
-package com.ead.notification.dtos;
+package com.ead.notification.adapters.dtos;
 
 import lombok.Data;
 
