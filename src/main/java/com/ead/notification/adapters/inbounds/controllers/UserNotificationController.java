@@ -1,6 +1,7 @@
 package com.ead.notification.adapters.inbounds.controllers;
 
 import com.ead.notification.adapters.dtos.NotificationDto;
+import com.ead.notification.adapters.dtos.NotificationRecordDto;
 import com.ead.notification.core.domains.NotificationDomain;
 import com.ead.notification.core.domains.PageInfo;
 import com.ead.notification.core.ports.NotificationServicePort;
@@ -48,12 +49,12 @@ public class UserNotificationController {
     @PutMapping("/users/{userId}/notifications/{notificationId}")
     public ResponseEntity<Object> updateNotification(@PathVariable(value = "userId") UUID userId,
                                                      @PathVariable(value = "notificationId") UUID notificationId,
-                                                     @RequestBody @Valid NotificationDto notificationDto) {
+                                                     @RequestBody @Valid NotificationRecordDto notificationRecordDto) {
         Optional<NotificationDomain> notificationModelOptional = notificationServicePort.findByNotificationIdAndUserId(notificationId, userId);
         if (notificationModelOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("Notification not found."));
         }
-        notificationModelOptional.get().setNotificationStatus(notificationDto.getNotificationStatus());
+        notificationModelOptional.get().setNotificationStatus(notificationRecordDto.notificationStatus());
         notificationServicePort.saveNotification(notificationModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body(notificationModelOptional.get());
     }
